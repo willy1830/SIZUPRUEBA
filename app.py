@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
@@ -15,9 +16,12 @@ def get_database_uri():
         return 'sqlite:///registros.db'
     # Heroku style: postgres:// → postgresql+psycopg://
     if url.startswith('postgres://'):
-        url = url.replace('postgres://', 'postgresql+psycopg://', 1)
+        url = url.replace('postgres://',
+                          'postgresql+psycopg://', 1)
+    # postgresQL standard: postgresql:// → postgresql+psycopg://
     elif url.startswith('postgresql://'):
-        url = url.replace('postgresql://', 'postgresql+psycopg://', 1)
+        url = url.replace('postgresql://',
+                          'postgresql+psycopg://', 1)
     return url
 
 # Configuración de la base de datos
@@ -45,15 +49,6 @@ def init_db():
 @app.route('/')
 def index():
     return render_template('index.html')
-
-# Ruta de verificación de conexión
-@app.route('/test-db')
-def test_db():
-    try:
-        result = db.session.execute('SELECT 1').scalar()
-        return f"✅ Conexión exitosa a la base de datos (Resultado: {result})"
-    except Exception as e:
-        return f"❌ Error al conectar con la base de datos:<br><pre>{str(e)}</pre>"
 
 # API para guardar registros
 @app.route('/api/registros', methods=['POST'])
