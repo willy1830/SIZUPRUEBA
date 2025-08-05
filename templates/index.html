@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Centrales Hidráulicas - Registro Técnico</title>
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
-    /* Variables de tema */
+    /* —— Variables y Reset —— */
     :root {
-      --color-primary: #1b365d;    /* Azul oscuro Sizuca */
-      --color-secondary: #f6f6f6;  /* Gris claro de fondo */
-      --color-accent: #d4a017;     /* Dorado para acentos */
+      --color-primary: #1b365d;
+      --color-secondary: #f6f6f6;
+      --color-accent: #d4a017;
       --font-base: 'Open Sans', sans-serif;
     }
-
-    /* Reset mínimo */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
-    /* Base */
     body {
       font-family: var(--font-base);
       background: var(--color-secondary);
@@ -32,15 +28,79 @@
       line-height: 1.5;
     }
 
-    a {
-      color: var(--color-primary);
-      text-decoration: none;
+    /* —— Overlay introducción —— */
+    #intro {
+      position: fixed; inset: 0;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
     }
-    a:hover {
-      opacity: 0.9;
+    #intro img {
+      width: 120px;
+      opacity: 0;
+      animation: logoSequence 6s ease-in-out forwards;
+    }
+    @keyframes logoSequence {
+      0%,33.33%{opacity:0;}
+      50%{opacity:1;}
+      83.33%{opacity:1;}
+      100%{opacity:0;}
     }
 
-    /* Header */
+    /* —— Navbar principal y dropdown —— */
+    nav.navbar {
+      background: var(--color-primary);
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+    }
+    nav.navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav.navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.25rem;
+      position: relative;
+      transition: color .2s;
+    }
+    nav.navbar a:hover {
+      color: var(--color-accent);
+    }
+    nav.navbar li.dropdown {
+      position: relative;
+    }
+    nav.navbar .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
+      z-index:10;
+    }
+    nav.navbar .dropdown-menu li {
+      padding: 0.5rem 1rem;
+    }
+    nav.navbar .dropdown-menu li a {
+      color: var(--color-primary);
+      font-weight: 400;
+      display: block;
+    }
+    nav.navbar .dropdown-menu li a:hover {
+      background: var(--color-secondary);
+    }
+    /* Mostrar menú al hover de todo el <li> */
+    nav.navbar li.dropdown:hover > .dropdown-menu {
+      display: block;
+    }
+
+    /* —— Header —— */
     header {
       background: var(--color-primary);
       color: white;
@@ -52,94 +112,250 @@
       font-weight: 600;
     }
 
-    /* Contenedor general */
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 0 1rem;
+    /* —— Secciones SPA —— */
+    section {
+      display: none;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    section.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Formulario responsive */
-    section {
-      padding: 1rem 0;
+    /* —— Hero (reutiliza #home) —— */
+    #home {
+      padding: 0; 
+      background: url('https://via.placeholder.com/1600x400') center/cover no-repeat;
+      position: relative;
+      color: #fff;
+      text-align: center;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    #home .overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.4);
+    }
+    #home .content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+    }
+    #home .content h2 {
+      font-size: 2.5rem;
+      margin-bottom: .5rem;
+    }
+    #home .content p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    #home .content .btn {
+      display: inline-block;
+      margin: .5rem;
+      padding: .75rem 1.5rem;
+      background: var(--color-accent);
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background .2s;
+    }
+    #home .content .btn:hover {
+      background: #b5830e;
+    }
+
+    /* —— Servicios —— */
+    #servicios .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 1.5rem;
+    }
+    #servicios .card {
+      background: var(--color-secondary);
+      padding: 1.5rem;
+      border-radius:6px;
+      text-align:center;
+      box-shadow:0 1px 4px rgba(0,0,0,.1);
+      transition: transform .3s, box-shadow .3s;
+    }
+    #servicios .card:hover {
+      transform: translateY(-5px);
+      box-shadow:0 5px 15px rgba(0,0,0,.1);
+    }
+    #servicios .card i {
+      font-size:2rem;
+      color: var(--color-primary);
+      margin-bottom:.5rem;
+    }
+
+    /* —— Estadísticas —— */
+    #estadisticas .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+    #estadisticas .stat .count {
+      font-size:2rem;
+      color: var(--color-accent);
+      display:block;
+      margin-bottom:.25rem;
+    }
+
+    /* —— Registro de datos —— */
     .form-container {
       background: white;
       padding: 1rem;
-      border-radius: 8px;
+      border-radius:8px;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
+      gap:1rem;
+      grid-template-columns:1fr;
     }
-    label {
-      font-weight: 600;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: var(--font-base);
-      font-size: 1rem;
-    }
-    button {
-      grid-column: span 1;
-      padding: 0.75rem;
-      background: var(--color-accent);
-      color: var(--color-primary);
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    button:hover {
-      opacity: 0.85;
-    }
-
-    /* Grid para pantallas grandes */
-    @media (min-width: 600px) {
+    @media(min-width:600px){
       .form-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
       }
       .form-container textarea,
       .form-container button {
         grid-column: span 2;
       }
     }
-
-    /* Reporte */
+    label { font-weight:600; }
+    input, select, textarea {
+      width:100%;
+      padding:.75rem;
+      border:1px solid #ccc;
+      border-radius:4px;
+      font-size:1rem;
+    }
+    button {
+      padding:.75rem;
+      background: var(--color-accent);
+      color: var(--color-primary);
+      border:none;
+      border-radius:4px;
+      font-weight:600;
+      cursor:pointer;
+      transition: opacity .2s;
+    }
+    button:hover { opacity:.85; }
     .report {
-      background: white;
-      padding: 1rem;
-      margin-top: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      margin-top:1rem;
+      padding:1rem;
+      background:white;
+      border-radius:8px;
+      box-shadow:0 1px 4px rgba(0,0,0,.1);
     }
     .report h3 {
       color: var(--color-primary);
-      margin-bottom: 0.5rem;
+      margin-bottom:.5rem;
     }
   </style>
 </head>
 <body>
+  <!-- Overlay -->
+  <div id="intro">
+    <a href="#"><img src="https://i.postimg.cc/1R8fvhXN/logo-sizuca.png" alt="logo-sizuca"></a>
+  </div>
 
-  <header>
-    <h1>Centrales Hidráulicas - Registro Técnico</h1>
-  </header>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <ul>
+      <li class="dropdown">
+        <a href="#">Documentación</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Planos hidráulicos acería</a></li>
+          <li><a href="#">Planos hidráulicos laminación</a></li>
+        </ul>
+      </li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#estadisticas">Estadísticas</a></li>
+      <li><a href="#registro" id="link-registro">Registro de datos</a></li>
+    </ul>
+  </nav>
 
-  <section class="container">
-    <div class="form-container">
+  <!-- Header -->
+  <header><h1>Centrales Hidráulicas - Registro Técnico</h1></header>
+
+  <!-- Hero -->
+  <section id="home" class="visible">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>Bienvenido a Sizu Hidráulica</h2>
+      <p>Monitorea y registra la presión y temperatura de tus centrales en tiempo real.</p>
+      <a href="#registro" class="btn">Registro de datos</a>
+      <a href="#" class="btn">Ver documentación</a>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios">
+    <h2>¿Qué ofrecemos?</h2>
+    <div class="grid">
+      <div class="card reveal">
+        <i class="fas fa-file-alt"></i>
+        <h3>Planos</h3>
+        <p>Descarga planos detallados por central.</p>
+      </div>
+      <div class="card reveal">
+        <i class="fas fa-calculator"></i>
+        <h3>Calculadoras</h3>
+        <p>Herramientas para cálculos hidráulicos.</p>
+      </div>
+      <div class="card reveal">
+        <i class="fas fa-chart-line"></i>
+        <h3>Reportes</h3>
+        <p>Gráficas de presión y temperatura.</p>
+      </div>
+      <div class="card reveal">
+        <i class="fas fa-life-ring"></i>
+        <h3>Soporte</h3>
+        <p>Asistencia técnica 24/7.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estadísticas -->
+  <section id="estadisticas">
+    <h2>En Números</h2>
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <span class="count" data-target="500">0</span>
+        <p>Registros procesados</p>
+      </div>
+      <div class="stat reveal">
+        <span class="count" data-target="10">0</span>
+        <p>Centrales monitoreadas</p>
+      </div>
+      <div class="stat reveal">
+        <span class="count" data-target="120">0</span>
+        <p>Usuarios activos</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registro de datos -->
+  <section id="registro">
+    <div class="form-container reveal">
       <div>
         <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha">
+        <input type="date" id="fecha"/>
       </div>
-
       <div>
         <label for="central">Central:</label>
         <select id="central">
-          <option value="" disabled selected>Selecciona central</option>
+          <option disabled selected>Selecciona central</option>
           <option>CENTRAL HORNO FUSIÓN</option>
           <option>CENTRAL HIDRÁULICA HORNO CUCHARA</option>
           <option>CENTRAL HIDRÁULICA DE LÍNEA</option>
@@ -148,29 +364,70 @@
           <option>CENTRAL HIDRÁULICA DE DESCARGA</option>
         </select>
       </div>
-
       <div>
-        <label for="presion">Presión Operativa (bar):</label>
-        <input type="number" id="presion" placeholder="Ej. 150" step="0.1">
+        <label for="presion">Presión (bar):</label>
+        <input type="number" id="presion" step="0.1" placeholder="Ej. 150"/>
       </div>
-
       <div>
-        <label for="temperatura">Temperatura de Fluido (°C):</label>
-        <input type="number" id="temperatura" placeholder="Ej. 60" step="0.1">
+        <label for="temperatura">Temperatura (°C):</label>
+        <input type="number" id="temperatura" step="0.1" placeholder="Ej. 60"/>
       </div>
-
       <div style="grid-column: span 2;">
-        <label for="observaciones">Observaciones / Incidentes:</label>
-        <textarea id="observaciones" rows="4" placeholder="Detalles de cualquier anomalía"></textarea>
+        <label for="observaciones">Observaciones:</label>
+        <textarea id="observaciones" rows="4" placeholder="Detalles…"></textarea>
       </div>
-
       <button id="guardarBtn" type="button">Guardar Registro</button>
     </div>
-
     <div id="reporte" class="report"></div>
   </section>
 
+  <!-- Scripts -->
+  <script src="https://kit.fontawesome.com/a2e0b1e2f4.js" crossorigin="anonymous"></script>
   <script>
+    // 1) Quitar overlay tras animación
+    setTimeout(() => document.getElementById('intro').style.display = 'none', 6000);
+
+    // 2) SPA: alternar home/registro
+    const home = document.getElementById('home');
+    const reg  = document.getElementById('registro');
+    document.getElementById('link-registro').addEventListener('click', e => {
+      e.preventDefault();
+      home.classList.remove('visible');
+      reg.classList.add('visible');
+    });
+
+    // 3) Scroll‐reveal con IntersectionObserver
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .3 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // 4) Contadores animados
+    document.querySelectorAll('.count').forEach(cnt => {
+      const animate = () => {
+        const target = +cnt.dataset.target;
+        let curr = +cnt.textContent;
+        const step = target / 200;
+        if (curr < target) {
+          cnt.textContent = Math.ceil(curr + step);
+          requestAnimationFrame(animate);
+        }
+      };
+      const onScroll = () => {
+        if (cnt.getBoundingClientRect().top < window.innerHeight) {
+          animate();
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+      window.addEventListener('scroll', onScroll);
+    });
+
+    // 5) Envío de registro
     document.getElementById("guardarBtn").addEventListener("click", async () => {
       const payload = {
         fecha: document.getElementById("fecha").value,
@@ -187,13 +444,12 @@
         });
         const data = await resp.json();
         if (!resp.ok) throw data;
-
         document.getElementById("reporte").innerHTML = `
           <h3>✅ Registro guardado (ID: ${data.id})</h3>
           <p><strong>Fecha:</strong> ${payload.fecha}</p>
           <p><strong>Central:</strong> ${payload.central}</p>
           <p><strong>Presión:</strong> ${payload.presion} bar</p>
-          <p><strong>Temperatura:</strong> ${payload.temperatura} °C</p>
+          <p><strong>Tempe.:</strong> ${payload.temperatura} °C</p>
           <p><strong>Obs.:</strong> ${payload.observaciones}</p>
         `;
       } catch (err) {
@@ -204,6 +460,5 @@
       }
     });
   </script>
-
 </body>
 </html>
