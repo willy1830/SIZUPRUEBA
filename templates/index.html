@@ -95,7 +95,6 @@
     nav.navbar .dropdown-menu li a:hover {
       background: var(--color-secondary);
     }
-    /* Mostrar menú al hover de todo el <li> */
     nav.navbar li.dropdown:hover > .dropdown-menu {
       display: block;
     }
@@ -131,9 +130,9 @@
       transform: translateY(0);
     }
 
-    /* —— Hero (reutiliza #home) —— */
+    /* —— Hero —— */
     #home {
-      padding: 0; 
+      padding: 0;
       background: url('https://via.placeholder.com/1600x400') center/cover no-repeat;
       position: relative;
       color: #fff;
@@ -270,20 +269,30 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="navbar">
-    <ul>
-      <li class="dropdown">
-        <a href="#">Documentación</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Planos hidráulicos acería</a></li>
-          <li><a href="#">Planos hidráulicos laminación</a></li>
-        </ul>
-      </li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#estadisticas">Estadísticas</a></li>
-      <li><a href="#registro" id="link-registro">Registro de datos</a></li>
-    </ul>
-  </nav>
+<nav class="navbar">
+  <ul>
+    <li class="dropdown">
+      <a href="#">Documentación</a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Planos hidráulicos acería</a></li>
+        <li><a href="#">Planos hidráulicos laminación</a></li>
+      </ul>
+    </li>
+
+<li class="dropdown">
+  <a href="#servicios">Calculadoras</a>
+  <ul class="dropdown-menu">
+    <li><a href="calculadora-oring.html">CALCULADORA DIMENSIONAMIENTO DE ORING Y RANURA</a></li>
+    <li><a href="#">CALCULADORA PARA CILINDROS</a></li>
+    <li><a href="#">CALCULADORA PARA BOMBAS</a></li>
+  </ul>
+</li>
+
+    <li><a href="#estadisticas">Estadísticas</a></li>
+    <li><a href="#registro" id="link-registro">Registro de datos</a></li>
+  </ul>
+</nav>
+
 
   <!-- Header -->
   <header><h1>Centrales Hidráulicas - Registro Técnico</h1></header>
