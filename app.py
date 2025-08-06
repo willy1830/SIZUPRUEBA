@@ -50,6 +50,13 @@ def init_db():
 def index():
     return render_template('index.html')
 
+# Ruta calculadora oring
+from flask import render_template
+
+@app.route('/calculadora-oring')
+def calculadora_oring():
+    return render_template('calculadora-oring.html')
+    
 # API para guardar registros
 @app.route('/api/registros', methods=['POST'])
 def guardar_registro():
