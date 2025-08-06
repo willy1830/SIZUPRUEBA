@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora Cilindro Hidráulico</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Calculadora Cilindro Hidráulico</h1>
+  </header>
+
+  <main>
+    <form id="hydraulic-form">
+      <div class="row">
+        <label>Diámetro Pistón (mm)</label>
+        <input type="number" id="dPiston" required>
+      </div>
+      <div class="row">
+        <label>Diámetro Vástago (mm)</label>
+        <input type="number" id="dRod" required>
+      </div>
+      <div class="row">
+        <label>Carrera (mm)</label>
+        <input type="number" id="stroke" required>
+      </div>
+      <div class="row">
+        <label>Presión (bar)</label>
+        <input type="number" id="pressure" required>
+      </div>
+      <div class="row">
+        <label>Caudal (L/min)</label>
+        <input type="number" id="flow" required>
+      </div>
+      <button type="submit">Calcular</button>
+    </form>
+
+    <section id="results" aria-live="polite">
+      <!-- Aquí aparecerán los resultados -->
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
