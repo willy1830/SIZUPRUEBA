@@ -64,6 +64,13 @@ from flask import render_template
 def calculadora_cilindros():
     return render_template('calculadora-cilindros.html')
 
+#Ruta calculadora bombas
+from flask import render_template
+
+@app.route('/calculadora-bombas')
+def calculadora_cilindros():
+    return render_template('calculadora-bmobas.html')
+
     
 # API para guardar registros
 @app.route('/api/registros', methods=['POST'])
