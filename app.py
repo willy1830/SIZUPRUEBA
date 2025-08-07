@@ -68,7 +68,7 @@ def calculadora_cilindros():
 from flask import render_template
 
 @app.route('/calculadora-bombas')
-def calculadora_cilindros():
+def calculadora_bombas():
     return render_template('calculadora-bmobas.html')
 
     
