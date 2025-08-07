@@ -56,6 +56,14 @@ from flask import render_template
 @app.route('/calculadora-oring')
 def calculadora_oring():
     return render_template('calculadora-oring.html')
+
+#Ruta calculadora cilindros
+from flask import render_template
+
+@app.route('/calculadora-cilindros')
+def calculadora_cilindros():
+    return render_template('calculadora-cilindros.html')
+
     
 # API para guardar registros
 @app.route('/api/registros', methods=['POST'])
